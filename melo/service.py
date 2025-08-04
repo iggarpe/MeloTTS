@@ -294,9 +294,22 @@ async def get_models_status():
 
 if __name__ == "__main__":
     import uvicorn
+    import argparse
+    
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description="MeloTTS Service")
+    parser.add_argument("--host", default=os.getenv("HOST", "127.0.0.1"), 
+                       help="Host to bind to (default: 127.0.0.1 for local, 0.0.0.0 for docker)")
+    parser.add_argument("--port", type=int, default=int(os.getenv("PORT", 8000)), 
+                       help="Port to bind to (default: 8000)")
+    parser.add_argument("--reload", action="store_true", 
+                       help="Enable auto-reload for development")
+    
+    args = parser.parse_args()
+    
     uvicorn.run(
         "melo.service:app",
-        host="0.0.0.0",
-        port=int(os.getenv("PORT", 8000)),
-        reload=False
+        host=args.host,
+        port=args.port,
+        reload=args.reload
     ) 
