@@ -298,8 +298,8 @@ if __name__ == "__main__":
     
     # Parse command line arguments
     parser = argparse.ArgumentParser(description="MeloTTS Service")
-    parser.add_argument("--host", default=os.getenv("HOST", "127.0.0.1"), 
-                       help="Host to bind to (default: 127.0.0.1 for local, 0.0.0.0 for docker)")
+    parser.add_argument("--host", default=os.getenv("HOST", "0.0.0.0"), 
+                       help="Host to bind to (default: 0.0.0.0 for all interfaces, 127.0.0.1 for localhost only)")
     parser.add_argument("--port", type=int, default=int(os.getenv("PORT", 8000)), 
                        help="Port to bind to (default: 8000)")
     parser.add_argument("--reload", action="store_true", 
